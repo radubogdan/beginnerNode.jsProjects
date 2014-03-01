@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  #wrapper
+    #movieInfo.outercontainer
+      h2 Movie Info
+      .container
+        .left
+          p#title
+          p#year
+          p#director
+          p#writer
+        .right
+          p#rating
+        .clearfix
+
+    #movieList.outercontainer
+      h2 Movies
+      table.container
+        thead
+          th Title
+          th Director
+          th Rating
+          th Delete?
+        tbody
+
+    #addMovie.outercontainer
+      h2 Add Movie
+      .container
+        input#inputTitle(type='text', placeholder='Movie title')
+        input#inputYear(type='text', placeholder='Movie year')
+        br
+        input#inputDirector(type='text', placeholder='Director')
+        input#inputWriter(type='text', placeholder='Writer')
+        br
+        input#inputRating(type='text', placeholder='Rating')
+        br
+        button#btnAddMovie Add Movie

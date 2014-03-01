@@ -1,0 +1,113 @@
+body {
+  font: 14px Lato;
+  margin: 0 0 2em 0;
+  padding: 0 0;
+  background: #475f77;
+  color: #354b5e;
+  text-align: center;
+}
+h2 {
+  font-size: 3em;
+  text-shadow: -1px -1px rgba(0,0,0,0.2);
+  color: rgba(255,255,255,0.3);
+  background-color: transparent;
+}
+.clearfix {
+  clear: both;
+}
+.container {
+  background: none repeat scroll 0 0 rgba(255,255,255,0.9);
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2), 0 25px 50px 0 rgba(0,0,0,0.15);
+  padding: 1em;
+  border: 0;
+}
+.outercontainer {
+  width: 80%;
+  margin: 0 auto;
+}
+#wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+#movieInfo {
+  display: none;
+}
+#movieInfo .container {
+  text-align: left;
+}
+#movieInfo .container .left {
+  width: 70%;
+  float: left;
+  font-size: 20px;
+}
+#movieInfo .container .left #title {
+  font-size: 30px;
+  color: #d74b4b;
+}
+#movieInfo .container .left #year {
+  width: 65px;
+  float: left;
+}
+#movieInfo .container .left #director {
+  float: left;
+}
+#movieInfo .container .left #writer {
+  clear: both;
+}
+#movieInfo .container .right {
+  width: 30%;
+  text-shadow: -1px -1px rgba(0,0,0,0.2);
+  float: left;
+  font-size: 70px;
+  color: rgba(53,75,94,0.89);
+}
+#movieInfo .container p {
+  margin: 0;
+}
+#movieList table {
+  margin: 0 auto;
+  width: 100%;
+  padding: 0.5em 0;
+}
+#movieList table tbody tr:nth-child(odd) {
+  background: #dcddd8;
+}
+#movieList table tbody a {
+  color: #354b5e;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+#movieList table tbody a:hover {
+  color: #d74b4b;
+}
+#addMovie {
+  clear: both;
+}
+#addMovie input[type=text],
+#addMovie input[type=number] {
+  background: #fff;
+  border: 1px solid #dcddd8;
+  box-shadow: 0 3px 3px 0 rgba(0,40,105,0.27), 0 25px 50px 0 rgba(0,0,0,0.15);
+  margin-bottom: 10px;
+  width: 70%;
+  padding: 5px;
+  color: #354b5e;
+}
+#addMovie input[type=text]:focus,
+#addMovie input[type=number]:focus {
+  box-shadow: 0 3px 8px 0 rgba(0,40,105,0.6), 0 25px 50px 0 rgba(0,0,0,0.15);
+}
+#addMovie button {
+  background: none repeat scroll 0 0 rgba(71,95,119,0.9);
+  border: 1px solid #475f77;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2), 0 25px 50px 0 rgba(0,0,0,0.15);
+  color: #dcddd8;
+  font-size: 18px;
+  height: 50px;
+  width: 110px;
+}
+#addMovie button:hover {
+  background: none repeat scroll 0 0 rgba(171,95,119,0.9);
+  border: 0;
+  color: #fff;
+}
