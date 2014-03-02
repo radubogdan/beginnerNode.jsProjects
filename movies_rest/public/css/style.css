@@ -54,6 +54,9 @@ h2 {
 #movieInfo .container .left #writer {
   clear: both;
 }
+#movieInfo .container #movie_id {
+  display: none;
+}
 #movieInfo .container .right {
   width: 30%;
   text-shadow: -1px -1px rgba(0,0,0,0.2);

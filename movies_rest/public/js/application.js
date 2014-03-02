@@ -40,8 +40,9 @@ var showMovie = function(evt) {
   $('#director').text(myMovieObj.director);
   $('#writer').text(myMovieObj.writer);
   $('#rating').text(myMovieObj.rating);
+  $('#movie_id').text(myMovieObj._id);
 
-  $('#movieInfo').slideToggle();
+  $('#movieInfo').show("fast");
 };
 
 var addMovie = function(evt) {
@@ -117,13 +118,19 @@ var deleteMovie = function(evt) {
   var sure = confirm('Are you sure?');
 
   if (sure) {
+    var movieInfo_id = $('#movie_id').html();
+    var movie_id = $(this).attr('rel');
+
+    if(movieInfo_id === movie_id) {
+      $('#movieInfo').hide("fast");
+    }
+
     $.ajax({
       type: 'DELETE',
       url: '/deletemovie/' + $(this).attr('rel')
     }).done(function(res) {
       if (res.msg === '') {
-      }
-      else {
+      } else {
         alert('Error: ' + res.msg);
       }
       seed();
