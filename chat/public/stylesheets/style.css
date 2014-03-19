@@ -1,0 +1,55 @@
+body {
+  font: 14px Helvetica, Arial, sans-serif;
+  margin: 2em 0 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#chat {
+  margin: 0 auto;
+  width: 960px;
+  height: 500px;
+  border: 1px solid lightgray;
+}
+
+#chat > #users {
+  height: 100%;
+  width: 250px;
+  float: left;
+  border-right: 1px solid lightgray;
+}
+
+#chat > #screen {
+  height: 460px;
+  width: 700px;
+  float: left;
+}
+
+#chat > #message-field {
+  height: 20px;
+  padding: 10px;
+  width: 688px;
+  border-top: 1px solid lightgray;
+  float: left;
+}
+
+#chat > #message-field > input {
+  background-color: white;
+  border: 0;
+  width: 90%;
+}
+
+button {
+  float: right;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: black;
+}
