@@ -11,6 +11,16 @@ var socket = require('socket.io');
 
 var app = express();
 var server = http.createServer(app);
+var stylus = require('stylus');
+var nib = require('nib');
+
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .use(nib())
+    .set('compress', true)
+    .import('nib');
+}
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -22,6 +32,12 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
+app.use(stylus.middleware({
+  src: __dirname + '/resources',
+  dest: __dirname + '/public',
+  debug: true,
+  force: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
