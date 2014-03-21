@@ -55,15 +55,18 @@ var io = socket.listen(server);
 
 // Log out when somebody connects
 io.sockets.on('connection', function(client) {
-  console.log('Client connected');
-  // Here I can use client.emit to send messages
   client.emit('messages', { hello: 'Welcome to my chat server' });
-});
 
-// Setup a listener on messages event
-io.sockets.on('connection', function(client) {
+  // Set the nickename of the client
+  client.on('join', function(nickname) {
+    client.set('nickname', nickname);
+  });
+
+  // Setup a listener on messages event
   client.on('messages', function(data) {
     // Broadcast the message to all clients
-    client.broadcast.emit("messages", data);
+    client.get('nickname', function(err, nickname) {
+      client.broadcast.emit("messages", nickname + ": " + data);
+    });
   });
 });
