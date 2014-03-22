@@ -10,6 +10,7 @@
     "jade": "*",
     "socket.io": "*",
     "stylus": "*",
-    "nib": "*"
+    "nib": "*",
+    "redis": "*"
   }
 }

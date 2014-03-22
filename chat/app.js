@@ -8,6 +8,8 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var socket = require('socket.io');
+var redis = require('redis');
+var rClient = redis.createClient();
 
 var app = express();
 var server = http.createServer(app);
@@ -51,14 +53,32 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-var io = socket.listen(server);
+var io = socket.listen(server, { log: false });
 
-// Log out when somebody connects
+// Use redis for persistance
+var storeMessage = function (name, data) {
+  // Turn object into string
+  var message = JSON.stringify({ name: name, data: data });
+
+  rClient.lpush("messages", message, function(err, res) {
+    // When we get a response take latest 5 messages
+    rClient.ltrim("messages", 0, 5);
+  });
+};
+
 io.sockets.on('connection', function(client) {
-  client.emit('messages', { hello: 'Welcome to my chat server' });
-
-  // Set the nickename of the client
+  // Set the nickename of the client, emit last messages
   client.on('join', function(nickname) {
+    rClient.lrange('messages', 0, -1, function(err, res) {
+      res = res.reverse();
+
+      // Loop through each message, parse and emit msg
+      res.forEach(function(message) {
+        message = JSON.parse(message);
+        client.emit("messages", message.name + message.data);
+      });
+    });
+
     client.set('nickname', nickname);
   });
 
@@ -67,6 +87,10 @@ io.sockets.on('connection', function(client) {
     // Broadcast the message to all clients
     client.get('nickname', function(err, nickname) {
       client.broadcast.emit("messages", nickname + ": " + data);
+
+      // Store the message into redis list
+      storeMessage(nickname + ": ", data);
     });
   });
+
 });

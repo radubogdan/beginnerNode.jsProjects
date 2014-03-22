@@ -24,6 +24,17 @@ h1 {
   width: 700px;
   float: left;
 }
+#chat #screen #chat-list {
+  height: 430px;
+  overflow: auto;
+}
+#chat #screen #chat-list dt {
+  float: left;
+  padding: 1px 5px;
+}
+#chat #screen #chat-list dd {
+  padding: 1px 5px;
+}
 #chat #message-field {
   height: 20px;
   padding: 10px;
