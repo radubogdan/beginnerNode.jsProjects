@@ -20,6 +20,10 @@ server.on('messages', function(data) {
   broadcastMessage(data);
 });
 
+server.on('add nickname', insertNickname);
+
+server.on('remove nickname', removeNickname);
+
 // This is called when send is pressed
 function SendMessage() {
   var message = document.getElementById('chat-message').value;
@@ -47,4 +51,20 @@ function broadcastMessage(msg) {
 
   var data = "<dt>" + msg.match(re_nickname) + "</dt>" + "<dd>" + msg.match(re_msg)[1] + "</dd>";
   field.innerHTML += data;
+}
+
+// This will insert a user in the users panel
+function insertNickname(nickname) {
+  var field = document.getElementById('users-list');
+
+  console.log(nickname);
+
+  var data = '<li id=' + nickname + '>' + nickname + '</li>';
+  field.innerHTML += data;
+}
+
+// Remove nickname for users-list
+function removeNickname(nickname) {
+  var user = document.getElementById(nickname);
+  user.remove();
 }

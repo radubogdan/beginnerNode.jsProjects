@@ -60,7 +60,7 @@ var storeMessage = function (name, data) {
   // Turn object into string
   var message = JSON.stringify({ name: name, data: data });
 
-  rClient.lpush("messages", message, function(err, res) {
+  rClient.lpush('messages', message, function(err, res) {
     // When we get a response take latest 5 messages
     rClient.ltrim("messages", 0, 5);
   });
@@ -75,18 +75,39 @@ io.sockets.on('connection', function(client) {
       // Loop through each message, parse and emit msg
       res.forEach(function(message) {
         message = JSON.parse(message);
-        client.emit("messages", message.name + message.data);
+        client.emit('messages', message.name + message.data);
       });
     });
 
+    // When someone join the chat, notify others about this!
+    client.broadcast.emit('add nickname', nickname);
+
+    // Put the new client in the set
+    rClient.sadd('users', nickname);
+
+    rClient.smembers('users', function(err, users) {
+      users.forEach(function(nickname) {
+        client.emit('add nickname', nickname);
+      });
+    });
+
+    // Set the nickname of a client
     client.set('nickname', nickname);
+  });
+
+  // Listen on disconnects
+  client.on('disconnect', function(nickname) {
+    client.get('nickname', function(err, nickname) {
+      client.broadcast.emit('remove nickname', nickname);
+      rClient.srem('users', nickname);
+    });
   });
 
   // Setup a listener on messages event
   client.on('messages', function(data) {
     // Broadcast the message to all clients
     client.get('nickname', function(err, nickname) {
-      client.broadcast.emit("messages", nickname + ": " + data);
+      client.broadcast.emit('messages', nickname + ": " + data);
 
       // Store the message into redis list
       storeMessage(nickname + ": ", data);

@@ -15,13 +15,13 @@ h1 {
 }
 #chat #users {
   height: 100%;
-  width: 250px;
+  width: 180px;
   float: left;
   border-right: 1px solid #d3d3d3;
 }
 #chat #screen {
   height: 460px;
-  width: 700px;
+  width: 779px;
   float: left;
 }
 #chat #screen #chat-list {
@@ -38,7 +38,7 @@ h1 {
 #chat #message-field {
   height: 20px;
   padding: 10px;
-  width: 688px;
+  width: 759px;
   border-top: 1px solid #d3d3d3;
   float: left;
 }
