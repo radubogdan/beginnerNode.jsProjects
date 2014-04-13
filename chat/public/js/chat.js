@@ -26,13 +26,18 @@ server.on('remove nickname', removeNickname);
 
 // This is called when send is pressed
 function SendMessage() {
-  var message = document.getElementById('chat-message').value;
+  // Take message container
+  var input = document.getElementById('chat-message');
+  var message = input.value;
 
   // Emit the message to the server
   server.emit('messages', message);
 
   // Insert message into message container - used to see your own message
   insertMessage(Global.nickname, message);
+
+  // Clear the input field after the message was sent
+  input.value = '';
 }
 
 // This will insert message into chat - used by client
@@ -67,4 +72,20 @@ function insertNickname(nickname) {
 function removeNickname(nickname) {
   var user = document.getElementById(nickname);
   user.remove();
+}
+
+// Function that recognize enter key on input text
+function code(e) {
+  e = e || window.event;
+  return (e.keyCode || e.which);
+}
+
+window.onload = function() {
+  document.onkeypress = function(e){
+    var key = code(e);
+    // If key is Enter
+    if (key == 13) {
+      SendMessage();
+    }
+  };
 }
